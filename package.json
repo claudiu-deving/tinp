@@ -1,0 +1,54 @@
+{
+  "name": "tinp",
+  "description": "Tekla Inp language support",
+  "author": "CCS",
+  "license": "MIT",
+  "version": "1.0.0",
+  "publisher": "ccs",
+  "categories": [
+    "Programming Languages"
+  ],
+  "keywords": [
+    "multi-root ready"
+  ],
+  "engines": {
+    "vscode": "^1.75.0"
+  },
+  "main": "./client/src/extension.js",
+  "contributes": {
+    "languages": [
+      {
+        "id": "tinp",
+        "aliases": [
+          "TINP",
+          "tinp"
+        ],
+        "extensions": [
+          ".inp"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "tinp",
+        "scopeName": "source.tinp",
+        "path": "./syntaxes/tinp.tmLanguage.json"
+      }
+    ]
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.6",
+    "@types/node": "^18.14.6",
+    "@typescript-eslint/eslint-plugin": "^7.1.0",
+    "@typescript-eslint/parser": "^7.1.0",
+    "eslint": "^8.57.0",
+    "mocha": "^10.3.0",
+    "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "vscode-languageclient": "^8.0.2",
+    "vscode-languageserver": "^8.0.2",
+    "vscode-languageserver-textdocument": "^1.0.4"
+  }
+}

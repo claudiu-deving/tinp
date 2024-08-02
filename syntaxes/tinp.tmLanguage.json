@@ -1,0 +1,35 @@
+{
+  "name": "TINP",
+  "scopeName": "source.tinp",
+  "patterns": [
+    {
+      "match": "\\b(part|welding|bolt|beam|spiral_beam|column|beamortho|twinprofile|contourplate|bentplate)\\b",
+      "name": "keyword.control.tinp"
+    },
+    {
+      "match": "\\b(attribute|value|modify|tab_page|unique_attribute|picture)\\b",
+      "name": "support.function.tinp"
+    },
+    {
+      "match": "\"[^\"]*\"",
+      "name": "string.quoted.double.tinp"
+    },
+    {
+      "match": "//.*$",
+      "name": "comment.line.double-slash.tinp"
+    },
+    {
+      "begin": "/\\*",
+      "end": "\\*/",
+      "name": "comment.block.tinp"
+    },
+    {
+      "match": "\\b([0-9]+)\\b",
+      "name": "constant.numeric.tinp"
+    },
+    {
+      "match": "\\b(date|none|no|yes|integer|float|string|option|label|material|profile|file_in|file_out|bolt_standard|bolt_size|ratio|strain|angle|deformation|dimension|radiusofinertia|area|areaperlength|sectionmodulus|momentofinertia|torsionconstant|warpingconstant|force|weight|distribload|springconstant|surfaceload|strength|modulus|density|moment|distribmoment|rotspringconst|temperature|thermdilatcoeff)\\b",
+      "name": "storage.type.tinp"
+    }
+  ]
+}
