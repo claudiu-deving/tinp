@@ -535,7 +535,7 @@ tab_page("Analysis")
         value("", 0)
     }
   }
- tab_page("Parameters","jd_Parameters",4) 
+ tab_page("Parameters","jd_Parameters",5);
  tab_page("EndConditions","jd_EndConditions",6)
  tab_page("Analysis","jd_Analysis",7)
  tab_page("ContourPlateOrientation","j_orientation",12)

@@ -3,7 +3,7 @@
   "scopeName": "source.tinp",
   "patterns": [
     {
-      "match": "\\b(part|welding|bolt|beam|spiral_beam|column|beamortho|twinprofile|contourplate|bentplate)\\b",
+      "match": "\\b(part|beam|welding|bolt|spiral_beam|column|twinprofile|contourplate|bentplate|loftedplate|foldedplate|concrete_beam|concrete_spiral_beam|concrete_column|pad_footing|strip_footing|concrete_panel|concrete_slab|loftedslab|rebar|surfacing|singledrawing|assemblydrawing|gadrawing|multidrawing|castunitdrawing|project|phase|reference_part|steelassembly|precastassembly|insituassembly|grid|grid_plane|task|pour_object|pour_unit|pour_break|item|concrete_item|surface_object)\\b",
       "name": "keyword.control.tinp"
     },
     {
@@ -28,7 +28,7 @@
       "name": "constant.numeric.tinp"
     },
     {
-      "match": "\\b(date|none|no|yes|integer|float|string|option|label|material|profile|file_in|file_out|bolt_standard|bolt_size|ratio|strain|angle|deformation|dimension|radiusofinertia|area|areaperlength|sectionmodulus|momentofinertia|torsionconstant|warpingconstant|force|weight|distribload|springconstant|surfaceload|strength|modulus|density|moment|distribmoment|rotspringconst|temperature|thermdilatcoeff)\\b",
+      "match": "\\b(distance|date|none|no|yes|integer|float|string|option|label|material|profile|file_in|file_out|bolt_standard|bolt_size|ratio|strain|angle|deformation|dimension|radiusofinertia|area|areaperlength|sectionmodulus|momentofinertia|torsionconstant|warpingconstant|force|weight|distribload|springconstant|surfaceload|strength|modulus|density|moment|distribmoment|rotspringconst|temperature|thermdilatcoeff)\\b",
       "name": "storage.type.tinp"
     }
   ]

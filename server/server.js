@@ -1,7 +1,7 @@
+/* eslint-disable no-unused-vars */
 const {
   createConnection,
   TextDocuments,
-  Diagnostic,
   DiagnosticSeverity,
   ProposedFeatures,
   InitializeParams,
@@ -9,10 +9,12 @@ const {
   CompletionItem,
   TextDocumentPositionParams,
   TextDocumentSyncKind,
-  InitializeResult,
 } = require("vscode-languageserver/node");
 
 const { TextDocument } = require("vscode-languageserver-textdocument");
+
+const { validate } = require("./parser");
+const { ParseLines } = require("./linesProvider");
 
 // Create a connection for the server
 const connection = createConnection(ProposedFeatures.all);
@@ -49,43 +51,15 @@ documents.onDidChangeContent((change) => {
 });
 
 async function validateTextDocument(textDocument) {
-  const text = textDocument.getText();
-  const lines = text.split(/\r?\n/);
-
-  const validKeywords = [
-    "part",
-    "welding",
-    "bolt",
-    "attribute",
-    "value",
-    "modify",
-    "tab_page",
-  ];
-  const diagnostics = [];
-
-  let inBlockComment = false;
-
-  for (let i = 0; i < lines.length; i++) {
-    let line = lines[i];
-
-    // Check for block comment start and end
-    if (line.includes("/*")) inBlockComment = true;
-    if (line.includes("*/")) {
-      inBlockComment = false;
-      continue; // Skip the line with block comment end
-    }
-
-    // Skip block comment lines
-    if (inBlockComment) continue;
-
-    // Remove inline comments
-    line = line.split("//")[0];
-    if()
-    
+  try {
+    const text = textDocument.getText();
+    let lines = ParseLines(text);
+    const diagnostics = validate(lines);
+    // Send the computed diagnostics to VSCode.
+    await connection.sendDiagnostics({ uri: textDocument.uri, diagnostics });
+  } catch (ex) {
+    console.log(ex);
   }
-
-  // Send the computed diagnostics to VSCode.
-  connection.sendDiagnostics({ uri: textDocument.uri, diagnostics });
 }
 
 // Make the text document manager listen on the connection

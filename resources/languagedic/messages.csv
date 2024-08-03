@@ -1,0 +1,8 @@
+key,en,ro
+odv_e_1,"The object definition pattern is not followed, it should be of form: 'part(0,""Part"")'","Pattern-ul pentru definirea noilor obiecte nu este respectata, ar trebui sa fie de forma: 'part(0,""Part"")'"
+odv_e_2,"The line should start with an object definition of type part,beam,welding.",""
+odv_e_3,"The object definition pattern is not followed, it should be of form: 'part(0,"Part")'\r\nThe first argument should be an integer (for index) and the second a string (for name)",""
+
+
+
+tdv_e_1,The line should start with a tab assignment `tab_page("Name" ,"Display name",index)`tab definition 'tab_page("Tab name")' or modify instruction",aha
