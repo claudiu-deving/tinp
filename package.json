@@ -3,8 +3,11 @@
   "description": "Tekla Inp language support",
   "author": "CCS",
   "license": "MIT",
-  "version": "1.0.0",
-  "publisher": "ccs",
+  "version": "0.2.1",
+  "publisher": "BitLuz",
+  "repository": {
+    "url": "https://github.com/claudiu-deving/tinp.git"
+  },
   "categories": [
     "Programming Languages"
   ],
@@ -16,9 +19,16 @@
   },
   "scripts": {
     "build": "tsc --sourceMap",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "vscode:prepublish": "webpack --mode production --devtool hidden-source-map",
+    "webpack": "webpack --config ./webpack.config.js",
+    "webpack:dev": "webpack --mode development --watch",
+    "test-compile": "webpack --config ./webpack.config.js"
   },
-  "main": "./client/src/extension.js",
+  "main": "./dist/extension.js",
+  "activationEvents": [
+    "onLanguage:tinp"
+  ],
   "contributes": {
     "languages": [
       {
@@ -43,13 +53,19 @@
   },
   "test": "mocha",
   "devDependencies": {
+    "@babel/core": "^7.25.7",
+    "@babel/preset-env": "^7.25.7",
     "@eslint/js": "^9.8.0",
     "@types/mocha": "^10.0.7",
     "@types/node": "^18.14.6",
+    "babel-loader": "^9.2.1",
     "chai": "^5.1.1",
     "eslint": "^9.8.0",
     "globals": "^15.9.0",
-    "mocha": "^10.7.0"
+    "mocha": "^10.7.0",
+    "ts-loader": "^9.5.1",
+    "webpack": "^5.95.0",
+    "webpack-cli": "^5.1.4"
   },
   "dependencies": {
     "vscode-languageclient": "^8.0.2",

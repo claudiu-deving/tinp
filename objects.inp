@@ -103,7 +103,7 @@ tab_page("IFCparameters")
     attribute("IFC_ENTITY", "j_IFC_entity", option,"%s", no, none, "0.0", "0.0",374,0,190)
     {
         value("Auto", 2)
-        value("None", 0)
+        value("None", 0) 
         value("IfcBeam", 0)
         value("IfcColumn", 0)
         value("IfcWall", 0)
