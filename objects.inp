@@ -214,6 +214,10 @@ tab_page("IFCparameters")
     {
         value("", 0)
     }
+     attribute("PRODUCT_UNIT", "j_Product_unit", label,"%s", no, none, "0.0", "0.0") 
+    { 
+       value("", 0) 
+    }
     attribute("PRODUCT_UNIT", "j_Product_unit", string,"%s", no, none, "0.0", "0.0") 
     { 
        value("", 0) 

@@ -1,0 +1,15 @@
+{
+    "version": "0.1.0",
+    "configurations": [
+        {
+            "name": "Launch Extension",
+            "type": "extensionHost",
+            "request": "launch",
+            "sourceMaps": true,
+            "args": [
+                "--extensionDevelopmentPath=${workspaceRoot}",
+                "--disable-extensions"
+            ]
+        }
+    ]
+}
