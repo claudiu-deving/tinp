@@ -1,71 +1,105 @@
+/* eslint-disable no-undef */
+/* eslint-disable @typescript-eslint/no-var-requires */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+//@ts-check
 'use strict';
+
+//@ts-check
+/** @typedef {import('webpack').Configuration} WebpackConfig **/
 
 const path = require('path');
 
-/**@type {import('webpack').Configuration}*/
-const clientConfig = {
-    target: 'node',
-    mode: 'none',
-    entry: './client/src/extension.js',
-    output: {
-        path: path.resolve(__dirname, 'dist'),
-        filename: 'extension.js',
-        libraryTarget: 'commonjs2'
-    },
-    externals: {
-        vscode: 'commonjs vscode'
-    },
-    resolve: {
-        extensions: ['.js']
-    },
-    module: {
-        rules: [
-            {
-                test: /\.js$/,
-                exclude: /node_modules/,
-                use: {
-                    loader: 'babel-loader',
-                    options: {
-                        presets: ['@babel/preset-env']
-                    }
-                }
-            }
-        ]
-    },
-    devtool: 'nosources-source-map'
+/** @type WebpackConfig */
+const browserClientConfig = {
+	context: path.join(__dirname, 'client'),
+	mode: 'none',
+	target: 'node', // web extensions run in a webworker context
+	entry: {
+		extension: './out/extension',
+	},
+	output: {
+		filename: '[name].js',
+		path: path.join(__dirname, 'client', 'dist'),
+		libraryTarget: 'commonjs',
+		devtoolModuleFilenameTemplate: '../[resource-path]'
+	},
+	resolve: {
+		mainFields: ['module', 'main'],
+		extensions: ['.ts', '.js'], // support ts-files and js-files
+		alias: {},
+		fallback: {
+			path: require.resolve('path-browserify'),
+		},
+	},
+	module: {
+		rules: [
+			{
+				test: /\.ts$/,
+				exclude: /node_modules/,
+				use: [
+					{
+						loader: 'ts-loader',
+					},
+				],
+			},
+		],
+	},
+	externals: {
+		vscode: 'commonjs vscode', // ignored because it doesn't exist
+	},
+	performance: {
+		hints: false,
+	},
+	devtool: 'nosources-source-map',
 };
 
-/**@type {import('webpack').Configuration}*/
-const serverConfig = {
-    target: 'node',
-    mode: 'none',
-    entry: './server/server.js',
-    output: {
-        path: path.resolve(__dirname, 'dist'),
-        filename: 'server.js',
-        libraryTarget: 'commonjs2'
-    },
-    externals: {
-        vscode: 'commonjs vscode'
-    },
-    resolve: {
-        extensions: ['.js']
-    },
-    module: {
-        rules: [
-            {
-                test: /\.js$/,
-                exclude: /node_modules/,
-                use: {
-                    loader: 'babel-loader',
-                    options: {
-                        presets: ['@babel/preset-env']
-                    }
-                }
-            }
-        ]
-    },
-    devtool: 'nosources-source-map'
+/** @type WebpackConfig */
+const browserServerConfig = {
+	context: path.join(__dirname, 'server'),
+	mode: 'none',
+	target: 'node', // web extensions run in a webworker context
+	entry: {
+		server: './out/server',
+	},
+	output: {
+		filename: '[name].js',
+		path: path.join(__dirname, 'server', 'dist'),
+		libraryTarget: 'var',
+		library: 'serverExportVar',
+		devtoolModuleFilenameTemplate: '../[resource-path]'
+	},
+	resolve: {
+		mainFields: ['module', 'main'],
+		extensions: ['.ts', '.js'], // support ts-files and js-files
+		alias: {},
+		fallback: {
+			//path: require.resolve("path-browserify")
+		},
+	},
+	module: {
+		rules: [
+			{
+				test: /\.ts$/,
+				exclude: /node_modules/,
+				use: [
+					{
+						loader: 'ts-loader',
+					},
+				],
+			},
+		],
+	},
+	externals: {
+		vscode: 'commonjs vscode', // ignored because it doesn't exist
+	},
+	performance: {
+		hints: false,
+	},
+	devtool: 'nosources-source-map',
 };
 
-module.exports = [clientConfig, serverConfig];
+module.exports = [browserClientConfig, browserServerConfig];

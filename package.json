@@ -1,75 +1,97 @@
 {
-  "name": "tinp",
-  "description": "Tekla Inp language support",
-  "author": "CCS",
-  "license": "MIT",
-  "version": "0.2.1",
-  "publisher": "BitLuz",
-  "repository": {
-    "url": "https://github.com/claudiu-deving/tinp.git"
-  },
-  "categories": [
-    "Programming Languages"
-  ],
-  "keywords": [
-    "multi-root ready"
-  ],
-  "engines": {
-    "vscode": "^1.75.0"
-  },
-  "scripts": {
-    "build": "tsc --sourceMap",
-    "lint": "eslint .",
-    "vscode:prepublish": "webpack --mode production --devtool hidden-source-map",
-    "webpack": "webpack --config ./webpack.config.js",
-    "webpack:dev": "webpack --mode development --watch",
-    "test-compile": "webpack --config ./webpack.config.js"
-  },
-  "main": "./dist/extension.js",
-  "activationEvents": [
-    "onLanguage:tinp"
-  ],
-  "contributes": {
-    "languages": [
-      {
-        "id": "tinp",
-        "aliases": [
-          "TINP",
-          "tinp"
-        ],
-        "extensions": [
-          ".inp"
-        ],
-        "configuration": "./language-configuration.json"
-      }
-    ],
-    "grammars": [
-      {
-        "language": "tinp",
-        "scopeName": "source.tinp",
-        "path": "./syntaxes/tinp.tmLanguage.json"
-      }
-    ]
-  },
-  "test": "mocha",
-  "devDependencies": {
-    "@babel/core": "^7.25.7",
-    "@babel/preset-env": "^7.25.7",
-    "@eslint/js": "^9.8.0",
-    "@types/mocha": "^10.0.7",
-    "@types/node": "^18.14.6",
-    "babel-loader": "^9.2.1",
-    "chai": "^5.1.1",
-    "eslint": "^9.8.0",
-    "globals": "^15.9.0",
-    "mocha": "^10.7.0",
-    "ts-loader": "^9.5.1",
-    "webpack": "^5.95.0",
-    "webpack-cli": "^5.1.4"
-  },
-  "dependencies": {
-    "vscode-languageclient": "^8.0.2",
-    "vscode-languageserver": "^8.0.2",
-    "vscode-languageserver-textdocument": "^1.0.4"
-  }
+	"name": "tinp",
+	"description": "Tekla Inp language support",
+	"author": "CCS",
+	"license": "MIT",
+	"version": "0.2.3",
+	"publisher": "BitLuz",
+	"repository": {
+		"url": "https://github.com/claudiu-deving/tinp.git"
+	},
+	"categories": [
+		"Programming Languages"
+	],
+	"keywords": [
+		"multi-root ready"
+	],
+	"engines": {
+		"vscode": "^1.75.0"
+	},
+	"activationEvents": [
+		"onLanguage:tinp"
+	],
+	"main": "./client/dist/extension",
+	"contributes": {
+		"languages": [
+			{
+				"id": "tinp",
+				"aliases": [
+					"TINP",
+					"tinp"
+				],
+				"extensions": [
+					".inp"
+				],
+				"configuration": "./language-configuration.json"
+			}
+		],
+		"grammars": [
+			{
+				"language": "tinp",
+				"scopeName": "source.tinp",
+				"path": "./syntaxes/tinp.tmLanguage.json"
+			}
+		],
+		"configuration": {
+			"type": "object",
+			"title": "Example configuration",
+			"properties": {
+				"languageServerExample.maxNumberOfProblems": {
+					"scope": "resource",
+					"type": "number",
+					"default": 100,
+					"description": "Controls the maximum number of problems produced by the server."
+				},
+				"languageServerExample.trace.server": {
+					"scope": "window",
+					"type": "string",
+					"enum": [
+						"off",
+						"messages",
+						"verbose"
+					],
+					"default": "off",
+					"description": "Traces the communication between VS Code and the language server."
+				}
+			}
+		}
+	},
+	"scripts": {
+		"vscode:prepublish": "npm run compile",
+		"compile": "tsc -b",
+		"watch": "tsc -b -w",
+		"lint": "eslint ./client/src ./server/src --ext .ts,.tsx",
+		"postinstall": "cd client && npm install && cd ../server && npm install && cd ..",
+		"test": "mocha -r ts-node/register 'server/src/test/*.ts'",
+		"package": "webpack --mode production --devtool hidden-source-map"
+	},
+	"test": "mocha",
+	"devDependencies": {
+		"@types/mocha": "^10.0.8",
+		"@types/node": "^20",
+		"@typescript-eslint/eslint-plugin": "^7.1.0",
+		"@typescript-eslint/parser": "^7.1.0",
+		"eslint": "^8.57.0",
+		"mocha": "^10.7.3",
+		"ts-node": "^10.9.2",
+		"typescript": "^5.6.2",
+		"webpack-cli": "^5.1.4",
+		"webpack": "^5.95.0"
+	},
+	"dependencies": {
+		"path": "^0.12.7",
+		"path-browserify": "^1.0.1",
+		"stream": "^0.0.3",
+		"ts-loader": "^9.5.1"
+	}
 }
